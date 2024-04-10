@@ -1,0 +1,36 @@
+<%- include partials/header.ejs %>
+
+<body>
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-md-6 offset-md-3">
+                <div id="readArea" class="text-center">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/MetaMask_Fox.svg/1200px-MetaMask_Fox.svg.png" alt="MetaMask Logo" style="width: 100px; height: 100px;">
+                    <h2 class="mt-3">Connect to MetaMask</h2>
+                    <button class="btn btn-success mt-3" onclick="connectMetamask()">CONNECT TO METAMASK</button>
+                    <p id="userArea" class="mt-3 text-muted">Status: Not connected to MetaMask</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+    let account;
+
+    const connectMetamask = async () => {
+        try {
+            if (window.ethereum !== undefined) {
+                const accounts = await ethereum.request({ method: "eth_requestAccounts" });
+                account = accounts[0];
+                document.getElementById("userArea").innerHTML = `User Account: ${account}`;
+                document.getElementById("userArea").classList.remove('text-muted');
+            } else {
+                alert("MetaMask extension not detected. Please install MetaMask and try again.");
+            }
+        } catch (error) {
+            console.error("Error connecting to MetaMask:", error);
+            alert("An error occurred while connecting to MetaMask. Please try again later.");
+        }
+    }
+</script>
