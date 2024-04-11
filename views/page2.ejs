@@ -4,14 +4,13 @@
 background: -webkit-linear-gradient(to right, #ffffff, #abbaab);  /* Chrome 10-25, Safari 5.1-6 */
 background: linear-gradient(to right, #ffffff, #abbaab); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */">
 
-<body>
+<body onload="connectMetamask()">
     <div class="container">
         <div class="row mt-5">
             <div class="col-md-6 offset-md-3">
                 <div id="readArea" class="text-center">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/MetaMask_Fox.svg/1200px-MetaMask_Fox.svg.png" alt="MetaMask Logo" style="width: 100px; height: 100px;">
-                    <h2 class="mt-3">Connect to MetaMask</h2>
-                    <button class="btn btn-success mt-3" onclick="connectMetamask()">CONNECT TO METAMASK</button>
+                    <h2 class="mt-3">Connected to MetaMask</h2>
                     <p id="userArea" class="mt-3 text-muted">Status: Not connected to MetaMask</p>
                 </div>
             </div>
@@ -125,170 +124,16 @@ background: linear-gradient(to right, #ffffff, #abbaab); /* W3C, IE 10+/ Edge, F
             </div>
         </div>
     </div>
-
-    <script>
-        let account;
-        let contractInstance;
-    
-        // Initialize contract instance with ABI and contract address
-        const initContract = () => {
-            const contractAddress = '0x6cf04cba382c7774bfb434cae2311a6091631c09'; 
-            const contractABI = [
-            [
-            {
-                "anonymous": false,
-                "inputs": [
-                    {
-                        "indexed": true,
-                        "internalType": "address",
-                        "name": "buyer",
-                        "type": "address"
-                    },
-                    {
-                        "indexed": false,
-                        "internalType": "uint256",
-                        "name": "productId",
-                        "type": "uint256"
-                    },
-                    {
-                        "indexed": false,
-                        "internalType": "uint256",
-                        "name": "price",
-                        "type": "uint256"
-                    }
-                ],
-                "name": "ProductPurchased",
-                "type": "event"
-            },
-            {
-                "inputs": [
-                    {
-                        "internalType": "uint256",
-                        "name": "productId",
-                        "type": "uint256"
-                    }
-                ],
-                "name": "buyProduct",
-                "outputs": [],
-                "stateMutability": "payable",
-                "type": "function"
-            },
-            {
-                "inputs": [
-                    {
-                        "internalType": "uint256",
-                        "name": "productId",
-                        "type": "uint256"
-                    },
-                    {
-                        "internalType": "uint256",
-                        "name": "price",
-                        "type": "uint256"
-                    }
-                ],
-                "name": "setProductPrice",
-                "outputs": [],
-                "stateMutability": "nonpayable",
-                "type": "function"
-            },
-            {
-                "inputs": [],
-                "stateMutability": "nonpayable",
-                "type": "constructor"
-            },
-            {
-                "inputs": [
-                    {
-                        "internalType": "uint256",
-                        "name": "productId",
-                        "type": "uint256"
-                    }
-                ],
-                "name": "getProductPrice",
-                "outputs": [
-                    {
-                        "internalType": "uint256",
-                        "name": "",
-                        "type": "uint256"
-                    }
-                ],
-                "stateMutability": "view",
-                "type": "function"
-            },
-            {
-                "inputs": [],
-                "name": "owner",
-                "outputs": [
-                    {
-                        "internalType": "address",
-                        "name": "",
-                        "type": "address"
-                    }
-                ],
-                "stateMutability": "view",
-                "type": "function"
-            },
-            {
-                "inputs": [
-                    {
-                        "internalType": "uint256",
-                        "name": "",
-                        "type": "uint256"
-                    }
-                ],
-                "name": "productPrices",
-                "outputs": [
-                    {
-                        "internalType": "uint256",
-                        "name": "",
-                        "type": "uint256"
-                    }
-                ],
-                "stateMutability": "view",
-                "type": "function"
-            }
-        ]
-            ];
-            contractInstance = new web3.eth.Contract(contractABI, contractAddress);
+</body>
+<script>
+        
+    let account;
+    const connectMetamask = async () => {
+        if(window.ethereum !== "underfined"){
+            const accounts = await ethereum.request({method: "eth_requestAccounts"});
+            account = accounts[0];
+            document.getElementById("userArea").innerHTML = `User Account: ${account}`;
         }
-    
-        const connectMetamask = async () => {
-            try {
-                if (window.ethereum !== undefined) {
-                    const accounts = await ethereum.request({ method: "eth_requestAccounts" });
-                    account = accounts[0];
-                    document.getElementById("userArea").innerHTML = `User Account: ${account}`;
-                    document.getElementById("userArea").classList.remove('text-muted');
-                } else {
-                    alert("MetaMask extension not detected. Please install MetaMask and try again.");
-                }
-            } catch (error) {
-                console.error("Error connecting to MetaMask:", error);
-                alert("An error occurred while connecting to MetaMask. Please try again later.");
-            }
-        }
-    
-        const buyProduct = async (productId) => {
-            try {
-                // Here you would implement the logic to interact with your smart contract to purchase the product.
-                // You can use the account variable to get the currently connected MetaMask account.
-                alert(`Product ${productId} purchased successfully by account: ${account}`);
-            } catch (error) {
-                console.error("Error purchasing product:", error);
-                alert("An error occurred while purchasing the product. Please try again later.");
-            }
-        }
-    
-        // Initialize contract instance and connect to MetaMask when the page loads
-        window.onload = () => {
-            if (typeof window.ethereum !== 'undefined') {
-                initContract();
-                connectMetamask(); // Automatically connect to MetaMask when the page loads
-            } else {
-                alert("MetaMask extension not detected. Please install MetaMask and try again.");
-            }
-        };
-    </script>
-    
-    </body>
-    </html>
+    }
+</script>
+</html>

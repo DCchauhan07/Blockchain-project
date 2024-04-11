@@ -107,7 +107,18 @@
     </style>
 </head>
 
-<body>
+<body onload="connectMetamask()">
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-md-6 offset-md-3">
+                <div id="readArea" class="text-center">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/MetaMask_Fox.svg/1200px-MetaMask_Fox.svg.png" alt="MetaMask Logo" style="width: 100px; height: 100px;">
+                    <h2 class="mt-3">Connected to MetaMask</h2>
+                    <p id="userArea" class="mt-3 text-muted">Status: Not connected to MetaMask</p>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="container">
         <div class="header">
             <h1>Welcome to BeanVerse</h1>
@@ -133,17 +144,22 @@
             </div>
             <!-- Add more coffee options here if needed -->
         </div>
-
         <div class="questions">
             <input type="text" placeholder="Name">
             <input type="email" placeholder="Email">
             <input type="tel" placeholder="Phone Number">
-            <input type="text" placeholder="Favorite Coffee">
-            <input type="text" placeholder="Favorite Cake">
-            <input type="text" placeholder="Favorite Pastry">
             <button>Submit</button>
         </div>
-    </div>
-</body>
-
+    </body>
+    <script>
+        
+        let account;
+        const connectMetamask = async () => {
+            if(window.ethereum !== "underfined"){
+                const accounts = await ethereum.request({method: "eth_requestAccounts"});
+                account = accounts[0];
+                document.getElementById("userArea").innerHTML = `User Account: ${account}`;
+            }
+        }
+    </script>
 </html>
