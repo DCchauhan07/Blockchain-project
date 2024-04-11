@@ -1,1 +1,100 @@
 <%- include partials/header.ejs %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Data Display</title>
+    <style>
+        /* Reset default margin and padding */
+        body, ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Global styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+
+        /* Box styles */
+        .box {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        /* Coin name styles */
+        .coin-name {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 18px;
+        }
+
+        /* Coin price styles */
+        .coin-price {
+            color: #777;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <ul id="dynamicList"></ul>
+
+    <script>
+        const api_call = async () => {
+            const url = 'https://coinranking1.p.rapidapi.com/coins?referenceCurrencyUuid=yhjMzLPhuIDl&timePeriod=24h&tiers%5B0%5D=1&orderBy=marketCap&orderDirection=desc&limit=50&offset=0';
+            const options = {
+                method: 'GET',
+                headers: {
+                    'X-RapidAPI-Key': '8b7068f6d0mshe2595ecf881d873p19f0ddjsn99dd59d869e6',
+                    'X-RapidAPI-Host': 'coinranking1.p.rapidapi.com'
+                }
+            };
+
+            let result = null;
+            try {
+                const response = await fetch(url, options);
+                result = await response.json();
+
+                function displayDynamicData() {
+                    const dynamicList = document.getElementById('dynamicList');
+
+                    dynamicList.innerHTML = '';
+                    coins_array = result.data.coins; // array
+                    coins_array.forEach(item => {
+                        // Create container for the list item
+                        const boxContainer = document.createElement('div');
+                        boxContainer.className = 'box';
+
+                        // Create paragraph for coin name
+                        var paragraph1 = document.createElement("p");
+                        paragraph1.textContent = item.name;
+                        paragraph1.className = "coin-name";
+                        boxContainer.appendChild(paragraph1);
+                   
+                        // Create paragraph for coin price
+                        var paragraph2 = document.createElement("p");
+                        paragraph2.textContent = item.price;
+                        paragraph2.className = "coin-price";
+                        boxContainer.appendChild(paragraph2);
+                        
+                        // Append the box container to the dynamic list
+                        dynamicList.appendChild(boxContainer);
+                    });
+                }
+                displayDynamicData();
+            } catch (error) {
+                console.error(error);
+            }
+        }
+       // api_call()
+    </script>
+</body>
+</html>
