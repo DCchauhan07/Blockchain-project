@@ -1,25 +1,126 @@
 <%- include partials/header.ejs %>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>OSM and Leaflet</title>
-    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - BeanVerse: Sip & Savor</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px;
+            background-color: #ffeeee;
+        }
+
+        main {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+        }
+
+        .contact-info,
+        .contact-form {
+            flex: 1;
+            padding: 20px;
+            background-color: #ffeeee; 
+            border-radius: 8px;
+        }
+
+        .contact-info ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .contact-info ul li {
+            margin-bottom: 10px;
+        }
+
+        .contact-info ul li a {
+            color: #333;
+            text-decoration: none;
+        }
+
+        .contact-form label {
+            display: block;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 1.2rem;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            resize: vertical;
+        }
+
+        .contact-form button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 1.2rem;
+            margin-top: 10px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        .contact-form button:hover {
+            background-color: #45a049;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: white;
+        }
+    </style>
 </head>
+
 <body>
-    <div id="map" style="width: 900px; height: 580px"></div>
-    <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
-    <script>
-        // Making API request to Blockchair
-        fetch('https://api.blockchair.com/bitcoin/stats')
-            .then(response => response.json())
-            .then(data => {
-                // Handle the data from the API response
-                console.log(data); // For example, you can log the data to the console
-            })
-            .catch(error => {
-                console.error('Error fetching data:', error);
-            });
-    </script>
+    <header>
+        <h1>Contact Us</h1>
+        <p>We'd love to hear from you!</p>
+    </header>
+
+    <main>
+        <section class="contact-info">
+            <h2>Get In Touch</h2>
+            <p>Whether you have a question about our coffee selection, want to book an event, or just want to say hi, we're here for you!</p>
+            <p>You can reach us through the following channels:</p>
+            <ul>
+                <li>Email: <a href="mailto:info@BeanVerse.com">info@BeanVerse.com</a></li>
+                <li>Phone: <a href="tel:+353234567890">+353 (899) 567-890</a></li>
+                <li>Visit us at our cafe: <address>25A, Lorcan Villas, Beaumont, Dublin5, D05 K3C3, Ireland</address></li>
+            </ul>
+        </section>
+
+        <section class="contact-form">
+            <h2>Drop Us a Message</h2>
+            <form action="submit.php" method="POST">
+                <label for="message">Your Message</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 BeanVerse: Sip & Savor. All rights reserved.</p>
+    </footer>
 </body>
+
 </html>

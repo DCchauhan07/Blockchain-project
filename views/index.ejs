@@ -10,11 +10,8 @@
     <style>
         body {
             background: #abbaab;
-            /* fallback for old browsers */
             background: -webkit-linear-gradient(to right, #ffffff, #abbaab);
-            /* Chrome 10-25, Safari 5.1-6 */
             background: linear-gradient(to right, #ffffff, #abbaab);
-            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
@@ -56,8 +53,8 @@
         }
 
         .coffee-option img {
-            width: 200px; /* Adjust this value as needed */
-            height: auto; /* Maintain aspect ratio */
+            width: 200px;
+            height: auto;
             border-radius: 8px;
             margin-bottom: 10px;
         }
@@ -87,7 +84,6 @@
 
         .questions button {
             background-color: #4CAF50;
-            /* Green */
             border: none;
             color: white;
             padding: 15px 32px;
@@ -104,6 +100,22 @@
         .questions button:hover {
             background-color: #45a049;
         }
+
+        .metamask-area {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        .metamask-area img {
+            width: 100px;
+            height: 100px;
+        }
+
+        @media (max-width: 768px) {
+            .metamask-area {
+                text-align: center;
+            }
+        }
     </style>
 </head>
 
@@ -111,9 +123,11 @@
     <div class="container">
         <div class="row mt-5">
             <div class="col-md-6 offset-md-3">
-                <div id="readArea" class="text-center">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/MetaMask_Fox.svg/1200px-MetaMask_Fox.svg.png" alt="MetaMask Logo" style="width: 100px; height: 100px;">
+                <div id="readArea" class="text-center metamask-area">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/MetaMask_Fox.svg/1200px-MetaMask_Fox.svg.png" alt="MetaMask Logo">
                     <h2 class="mt-3">Connected to MetaMask</h2>
+                    <button onclick="connectContract()">CONNECT TO CONTRACT</button>
+                    <p id="contractArea">Status: Not connected to Contract</p>
                     <p id="userArea" class="mt-3 text-muted">Status: Not connected to MetaMask</p>
                 </div>
             </div>
@@ -142,17 +156,17 @@
                 <img src="https://img.cake24x7.com/writable/apps/cake24x7/ProductGallery/5969/Mouth-Watering-Chocolate-Pastry---6-Pcs.jpg" alt="Chocolate Pastry">
                 <p>Pastry</p>
             </div>
-            <!-- Add more coffee options here if needed -->
+            
         </div>
         <div class="questions">
-            <input type="text" placeholder="Name">
-            <input type="email" placeholder="Email">
-            <input type="tel" placeholder="Phone Number">
-            <button>Submit</button>
+            <input type="text" id="name" placeholder="name">
+            <input type="email" id="email" placeholder="email">
+            <input type="tel" id="mobile" placeholder="mobile">
+            <button onclick="registerUser()">Submit</button>
         </div>
     </body>
     <script>
-        
+
         let account;
         const connectMetamask = async () => {
             if(window.ethereum !== "underfined"){

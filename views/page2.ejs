@@ -4,13 +4,15 @@
 background: -webkit-linear-gradient(to right, #ffffff, #abbaab);  /* Chrome 10-25, Safari 5.1-6 */
 background: linear-gradient(to right, #ffffff, #abbaab); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */">
 
-<body onload="connectMetamask()">
+<body onload="connectMetamask(),connectContract()">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.2.7-rc.0/web3.min.js"></script>
     <div class="container">
         <div class="row mt-5">
             <div class="col-md-6 offset-md-3">
                 <div id="readArea" class="text-center">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/MetaMask_Fox.svg/1200px-MetaMask_Fox.svg.png" alt="MetaMask Logo" style="width: 100px; height: 100px;">
                     <h2 class="mt-3">Connected to MetaMask</h2>
+                    <p id="contractArea">Status: Not connected to Contract</p>
                     <p id="userArea" class="mt-3 text-muted">Status: Not connected to MetaMask</p>
                 </div>
             </div>
@@ -25,8 +27,7 @@ background: linear-gradient(to right, #ffffff, #abbaab); /* W3C, IE 10+/ Edge, F
                     <div class="card-body">
                         <h5 class="card-title">Cappuccino</h5>
                         <p class="card-text">A classic coffee drink made with equal parts brewed coffee and steamed milk.the perfect balance of espresso, steamed milk and foam.</p>
-                        <p class="card-text"><strong>Price: 0.40Eth</strong></p>
-                        <button onclick="buyProduct(1)" class="btn btn-primary">Buy Now</button>
+                        <button onclick="depositContract()">Buy Now</button><br>
                     </div>
                 </div>
             </div>
@@ -36,8 +37,7 @@ background: linear-gradient(to right, #ffffff, #abbaab); /* W3C, IE 10+/ Edge, F
                     <div class="card-body">
                         <h5 class="card-title">Frappuccino</h5>
                         <p class="card-text">A Frappuccino is a trademarked blended coffee beverage.</p>
-                        <p class="card-text"><strong>Price: 0.70Eth</strong></p>
-                        <button onclick="buyProduct(2)" class="btn btn-primary">Buy Now</button>
+                        <button onclick="depositContract()">Buy Now</button><br>
                     </div>
                 </div>
             </div>
@@ -47,8 +47,7 @@ background: linear-gradient(to right, #ffffff, #abbaab); /* W3C, IE 10+/ Edge, F
                     <div class="card-body">
                         <h5 class="card-title">Cake</h5>
                         <p class="card-text">A rainbow cake is a vibrant and visually stunning dessert.</p>
-                        <p class="card-text"><strong>Price: 0.60Eth</strong></p>
-                        <button onclick="buyProduct(3)" class="btn btn-primary">Buy Now</button>
+                        <button onclick="depositContract()">Buy Now</button><br>
                     </div>
                 </div>
             </div>
@@ -60,8 +59,7 @@ background: linear-gradient(to right, #ffffff, #abbaab); /* W3C, IE 10+/ Edge, F
                     <div class="card-body">
                         <h5 class="card-title">Chocolate Pastry</h5>
                         <p class="card-text">A chocolate pastry is a delectable dessert that features a rich and indulgent chocolate flavor wrapped in a flaky, buttery pastry.</p>
-                        <p class="card-text"><strong>Price: 0.80Eth</strong></p>
-                        <button onclick="buyProduct(4)" class="btn btn-primary">Buy Now</button>
+                        <button onclick="depositContract()">Buy Now</button><br>
                     </div>
                 </div>
             </div>
@@ -71,8 +69,7 @@ background: linear-gradient(to right, #ffffff, #abbaab); /* W3C, IE 10+/ Edge, F
                     <div class="card-body">
                         <h5 class="card-title">Tea</h5>
                         <p class="card-text">Masala tea, also known as chai Indian beverage cherished for its aromatic blend of spices combined with rich black tea.</p>
-                        <p class="card-text"><strong>Price: 0.90Eth</strong></p>
-                        <button onclick="buyProduct(5)" class="btn btn-primary">Buy Now</button>
+                        <button onclick="depositContract()">Buy Now</button><br>
                     </div>
                 </div>
             </div>
@@ -82,8 +79,7 @@ background: linear-gradient(to right, #ffffff, #abbaab); /* W3C, IE 10+/ Edge, F
                     <div class="card-body">
                         <h5 class="card-title">Latte</h5>
                         <p class="card-text">A latte or caffè latte is a milk coffee that is a made up of one or two shots of espresso, steamed milk and frothed milk on top.</p>
-                        <p class="card-text"><strong>Price: 0.50Eth</strong></p>
-                        <button onclick="buyProduct(6)" class="btn btn-primary">Buy Now</button>
+                        <button onclick="depositContract()">Buy Now</button><br>
                     </div>
                 </div>
             </div>
@@ -95,8 +91,7 @@ background: linear-gradient(to right, #ffffff, #abbaab); /* W3C, IE 10+/ Edge, F
                     <div class="card-body">
                         <h5 class="card-title">Masala Tea</h5>
                         <p class="card-text">Masala tea, also known as chai, is a popular Indian beverage and blend of spices.</p>
-                        <p class="card-text"><strong>Price: 0.30Eth</strong></p>
-                        <button onclick="buyProduct(7)" class="btn btn-primary">Buy Now</button>
+                        <button onclick="depositContract()">Buy Now</button><br>
                     </div>
                 </div>
             </div>
@@ -106,8 +101,7 @@ background: linear-gradient(to right, #ffffff, #abbaab); /* W3C, IE 10+/ Edge, F
                     <div class="card-body">
                         <h5 class="card-title">Blackcurrant Pastry</h5>
                         <p class="card-text">A blackcurrant pastry is a delightful sweet treat that typically features a buttery, flaky pastry filled with a luscious blackcurrant filling.</p>
-                        <p class="card-text"><strong>Price: 0.70Eth</strong></p>
-                        <button onclick="buyProduct(8)" class="btn btn-primary">Buy Now</button>
+                        <button onclick="depositContract()">Buy Now</button><br>
                     </div>
                 </div>
             </div>
@@ -117,8 +111,7 @@ background: linear-gradient(to right, #ffffff, #abbaab); /* W3C, IE 10+/ Edge, F
                     <div class="card-body">
                         <h5 class="card-title">Ferrero Rocher</h5>
                         <p class="card-text">Ferrero Rocher is a popular brand of chocolate confectionery that consists of a whole roasted hazelnut encased in a thin wafer shell filled with hazelnut cream.</p>
-                        <p class="card-text"><strong>Price: 0.90Eth</strong></p>
-                        <button onclick="buyProduct(9)" class="btn btn-primary">Buy Now</button>
+                        <button onclick="depositContract()">Buy Now</button><br>
                     </div>
                 </div>
             </div>
@@ -137,5 +130,39 @@ background: linear-gradient(to right, #ffffff, #abbaab); /* W3C, IE 10+/ Edge, F
             document.getElementById("userArea").innerHTML = `User Account: ${account}`;
         }
     }
+    const connectContract = async () => {
+        const ABI =[
+        
+	{
+		"inputs": [],
+		"name": "deposit",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getAddress",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+]
+        const Address = "0x234990A5254285B68B726c7cc2bda562AedC9b94"; 
+        window.web3 = await new Web3(window.ethereum);
+        window.contract = await new window.web3.eth.Contract(ABI, Address);
+        document.getElementById("contractArea").innerHTML = "Connected to Contract"; 
+    }
+const depositContract = async () => {
+        //const amount = document.getElementById("depositInput").value;
+        await window.contract.methods.deposit().send({from: account, value: 1});
+    }
+
 </script>
 </html>

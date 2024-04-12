@@ -7,29 +7,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dynamic Data Display</title>
     <style>
-        /* Reset default margin and padding */
+        
         body, ul {
             margin: 0;
             padding: 0;
         }
 
-        /* Global styles */
+        
         body {
             font-family: Arial, sans-serif;
             background-color: #f0f0f0;
             padding: 20px;
         }
 
-        /* Box styles */
-        .box {
-            background-color: #fff;
+        
+        .card {
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             padding: 15px;
             margin-bottom: 15px;
         }
 
-        /* Coin name styles */
+        
         .coin-name {
             font-weight: bold;
             color: #333;
@@ -37,7 +36,7 @@
             font-size: 18px;
         }
 
-        /* Coin price styles */
+        
         .coin-price {
             color: #777;
             font-size: 16px;
@@ -67,26 +66,26 @@
                     const dynamicList = document.getElementById('dynamicList');
 
                     dynamicList.innerHTML = '';
-                    coins_array = result.data.coins; // array
+                    coins_array = result.data.coins; 
                     coins_array.forEach(item => {
-                        // Create container for the list item
-                        const boxContainer = document.createElement('div');
-                        boxContainer.className = 'box';
-
-                        // Create paragraph for coin name
-                        var paragraph1 = document.createElement("p");
-                        paragraph1.textContent = item.name;
-                        paragraph1.className = "coin-name";
-                        boxContainer.appendChild(paragraph1);
-                   
-                        // Create paragraph for coin price
-                        var paragraph2 = document.createElement("p");
-                        paragraph2.textContent = item.price;
-                        paragraph2.className = "coin-price";
-                        boxContainer.appendChild(paragraph2);
                         
-                        // Append the box container to the dynamic list
-                        dynamicList.appendChild(boxContainer);
+                        const card = document.createElement('div');
+                        card.className = 'card';
+                        card.style.backgroundColor = getRandomLightColor(); 
+                        
+                        var coinName = document.createElement("p");
+                        coinName.textContent = item.name;
+                        coinName.className = "coin-name";
+                        card.appendChild(coinName);
+                   
+                        
+                        var coinPrice = document.createElement("p");
+                        coinPrice.textContent = item.price;
+                        coinPrice.className = "coin-price";
+                        card.appendChild(coinPrice);
+
+                        
+                        dynamicList.appendChild(card);
                     });
                 }
                 displayDynamicData();
@@ -94,7 +93,18 @@
                 console.error(error);
             }
         }
-       // api_call()
+        //api_call()
+
+        
+        function getRandomLightColor() {
+            const min = 180; 
+            const max = 255; 
+            const range = max - min;
+            const r = Math.floor(Math.random() * range) + min; 
+            const g = Math.floor(Math.random() * range) + min; 
+            const b = Math.floor(Math.random() * range) + min; 
+            return `rgb(${r}, ${g}, ${b})`;
+        }
     </script>
 </body>
 </html>
