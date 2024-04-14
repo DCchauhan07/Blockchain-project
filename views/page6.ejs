@@ -1,1 +1,55 @@
 <%- include partials/header.ejs %>
+
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Customized OSM and Leaflet Map</title>
+      <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css"/>
+      <style>
+         body {
+            background-color: #000; 
+            color: #fff; 
+         }
+         #map-container {
+            width: 60%;
+            margin: 20px auto; 
+            border: 2px solid #ccc; 
+            border-radius: 10px; 
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+            overflow: hidden;
+         }
+         #map {
+            width: 100%; 
+            height: 400px; 
+         }
+      </style>
+   </head>
+   <body>
+      <nav class="navbar">
+         
+      </nav>
+      <div id="map-container"> 
+         <div id="map"></div> 
+      </div>
+      <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+      <script>
+
+         var mapOptions = {
+            center: [53.3482, -6.2439], 
+            zoom: 15 
+         };
+         var map = L.map('map', mapOptions);
+         var layer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
+         layer.addTo(map);
+         var customIcon = L.icon({
+            iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png', 
+            iconSize: [25, 41], 
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34] 
+         });
+         
+         var marker = L.marker([53.3482, -6.2439], {icon: customIcon}).addTo(map); 
+         marker.bindPopup("National College of Ireland"); 
+      </script>
+   </body>
+</html>

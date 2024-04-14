@@ -8,39 +8,68 @@
     <title>Dynamic Data Display</title>
     <style>
         
-        body, ul {
-            margin: 0;
-            padding: 0;
-        }
+        body,
+ul {
+    margin: 0;
+    padding: 0;
+}
 
-        
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            padding: 20px;
-        }
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    padding: 20px;
+}
 
-        
-        .card {
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            padding: 15px;
-            margin-bottom: 15px;
-        }
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+}
 
-        
-        .coin-name {
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 8px;
-            font-size: 18px;
-        }
+.card {
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    margin-bottom: 20px;
+    background-color: #fff;
+}
 
-        
-        .coin-price {
-            color: #777;
-            font-size: 16px;
-        }
+.coin-name {
+    font-weight: bold;
+    color: #333;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.coin-price {
+    color: #000; 
+    font-size: 18px;
+}
+
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+    .card {
+        padding: 15px;
+    }
+
+    .coin-name {
+        font-size: 18px;
+    }
+
+    .coin-price {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 576px) {
+    .container {
+        padding: 0 15px;
+    }
+}
     </style>
 </head>
 <body>
